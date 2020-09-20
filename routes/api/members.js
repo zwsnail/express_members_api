@@ -43,7 +43,8 @@ router.post('/', (req, res) => {
 
     members.push(newMember);
     // res.json(members)
-    res.redirect('localhost:5000/art');//必须刷新才能看到新的添加
+    // res.redirect('localhost:5000/art');//这种方式必须刷新才能看到新的添加
+    res.redirect('back');//自动刷新页面！！推荐！！
 })
 
 

@@ -2,6 +2,12 @@
 简书自家小笔记 📒 node 
 https://www.jianshu.com/p/0de4ecb89e0d
 
+## browser-sync
+browser-sync start --proxy='localhost:5000' --files="public/*.html" 
+
+Auto sync codes with browser in different devices!
+So handy!
+
 ## what is Express?
 
 - Express is a fast,, minimalist web framework for Node.js.

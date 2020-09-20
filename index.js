@@ -48,6 +48,8 @@ app.use('/api/members', require('./routes/api/members'))
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server is running on ${PORT}`)
 );
+//global是一个全局变量
+// console.log(global)
 
 
 // npm start & node index are gonna run the server without nodemon
