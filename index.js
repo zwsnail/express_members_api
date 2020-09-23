@@ -1,30 +1,35 @@
-const express = require('express')
-const path = require('path')
-const logger = require('./middleware/logger')
+const express = require('express');
+const path = require('path');
+const logger = require('./middleware/logger');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-Parser');
+const members = require('./Members.js');
 
-const members = require('./Members.js')
 
 const app = express();
 
 //一般用么用server-side app想这种，要么用api前后端分离+Vue这些
 //express-handlebars官方上面写的两行安装方式,类似于laravel的blade，还有EJS另一个npm包
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));//{ defaultLayout: 'main' }
-app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphbs({ defaultLayout: 'main' }));//{ defaultLayout: 'main' }
+// app.set('view engine', 'handlebars');
 
 //一直有错误，渲染不出来，我换了一个art-template
-// app.engine('art', require('express-art-template'));
+app.engine('art', require('express-art-template'));
 //view 改为view options，错误从 View is not a constructor 变成 callback is not a function
-// app.set('view options', { debug: process.env.NODE_ENV !== 'production' });
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'art');
+app.set('view options', { debug: process.env.NODE_ENV !== 'production' });
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'art');
 
+//配置第三方中间键获取post提交的数据
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.get('/art', (req, res) => {
     // res.render('home.art', { title: 'ok', members });//把home那页渲染出来
     res.render('home', { title: 'ok', members });//这个可以渲染出handlebars
 });
+
 
 //下面两行是post API发送body的时候需要
 app.use(express.json())//express.json() will allow us to handle raw json
@@ -42,6 +47,7 @@ app.use(logger)//只要访问一次，下面控制台就打印
 
 //访问链接时的api/members路由，都由api下面的members.js来处理
 app.use('/api/members', require('./routes/api/members'))
+app.use('/api/upload', require('./routes/api/upload'))
 
 
 

@@ -11,21 +11,33 @@
     <h1>{{title}}</h1>
     <ul>
         {{each members}}
-        <!-- <li>{{!$index}} : {{!$value}}</li> -->
+        <li>{{!$index}} : {{!$value}}</li>
         <li>{{$value.name}} : {{$value.email}}</li>
         {{/each}}
     </ul>
 
+    <form action="/api/members" method="post">
+        Name: <input type="name" name="name"> <br>
+        Email: <input type="email" name="email">
+        <input type="submit" value="Submit">
+    </form>
 
+
+    <h1>User Mutler to upload one picture or file</h1>
+    <form method="post" action="/api/upload/one" enctype="multipart/form-data">
+        Upload Picture: <input type="file" name="pic">
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <h1>User Mutler to upload pictures or files</h1>
+    <form method="post" action="/api/upload/multi" enctype="multipart/form-data">
+        Upload 1st Picture: <input type="file" name="pic1"></br>
+        Upload 2nd Picture: <input type="file" name="pic2">
+        <input type="submit" value="Submit Both">
+    </form>
 
 </body>
 
 </html>
 
-
-
-<form action="/api/members" method="post">
-    Name: <input type="name" name="name"> <br>
-    Email: <input type="email" name="email">
-    <input type="submit" value="Submit">
-</form>

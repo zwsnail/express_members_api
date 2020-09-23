@@ -24,7 +24,8 @@ router.get('/:id', (req, res) => {
 
 
 // router.post('http://localhost:5000/home', (req, res) => {
-//     res.send(req.body)
+//     res.send(req.body)直接传
+//     res.render('home')这种是渲染某个页面
 //     res.redirect('http://localhost:5000/api/members')
 // })
 
